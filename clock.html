@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html
+        {
+            background-color: #333;
+        }
+
+        .clock 
+        {
+            width: 200px;
+            border-radius: 50%;
+            border: 10px solid #ffff;
+            height: 200px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .clock-face
+        {
+            width: 95%;
+            height: 100%;
+            position: relative;
+            -webkit-transform: translateY(-3px);
+            -moz-transform: translateY(-3px);
+            transform: translateY(-3px);
+            display: inline-block;
+        }
+
+
+        .bind
+        {
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transition: all 0.05s cubic-bezier(0.1, 2.7, 0.58, 1);
+            width: 50%;
+            height: 6px;
+            color: #000;
+            font-size: 2em;
+            background-color:#000;
+            transform: rotate(90deg);
+            right: 50%;
+        }
+
+        .hour
+        {
+            width: 40%;
+
+        }
+
+        .minut
+        {
+            width: 45%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="clock">
+        <div class="clock-face">
+            <div class="bind hour"></div>
+            <div class="bind minut"></div>
+            <div class="bind scound"></div>
+        </div>
+    </div>
+    
+<script type="text/javascript">
+    
+
+    var h = document.querySelector('.hour');
+    var m = document.querySelector('.minut');
+    var s = document.querySelector('.scound');
+
+    function setDtae(){
+
+        'use strict';
+
+        const now = new Date();
+
+        const scound = now.getSeconds();
+        const scoundDegrees = ((scound / 60) * 360) + 90;
+        s.style.transform = `rotate(${scoundDegrees}deg)`;
+
+        const minut = now.getMinutes();
+        const minutDegrees = ((minut / 60) * 360) +90;
+        m.style.transform = `rotate(${minutDegrees}deg)`;
+
+        const hour = now.getHours();
+        const hourDegrees = ((hour / 12) * 360) + 90;
+        h.style.transform = `rotate(${hourDegrees}deg)`;
+
+    }
+     
+     setInterval(setDtae, 1000);
+
+</script>
+</body>
+</html>

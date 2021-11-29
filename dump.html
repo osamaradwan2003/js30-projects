@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        html
+        {
+            background-color: #000;
+        }
+
+        .dump-section
+        {
+            width: 80%;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            margin: 50px auto;
+        }
+
+        .key 
+        {
+            width: 96px;
+            margin: 0 auto;
+            text-align: center;
+            display: inline-block;
+            border: 2px solid #333;
+            padding: 4px;
+            box-sizing: content-box;
+            transition: all 0.7s
+        
+        }
+
+        kbd.click 
+        {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        span.name 
+        {
+            font-size: 14px;
+            color: #cca415f2;
+        }
+
+        .plying
+        {
+            border: 2px solid #cca;
+            transform: scale(1.1);
+            box-shadow: 1px 1px 1px #ccc;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="dump-section">
+
+        <div data-key="65" class="key">
+            <kbd class="click">A</kbd>
+            <span class="name">CLAP</span>
+        </div>
+
+        <div data-key="83" class="key">
+                <kbd class="click">S</kbd>
+                <span class="name">hihat</span>
+        </div>
+       
+        <div data-key="68" class="key">
+                <kbd class="click">d</kbd>
+                <span class="name">kick</span>
+        </div>
+        <div data-key="70" class="key">
+                <kbd class="click">f</kbd>
+                <span class="name">openhat</span>
+        </div>
+
+        <div data-key="71" class="key">
+            <kbd class="click">g</kbd>
+            <span class="name">boom</span>
+        </div>
+
+        <div data-key="72" class="key">
+            <kbd class="click">h</kbd>
+            <span class="name">ride</span>
+        </div>
+
+        <div data-key="74" class="key">
+                <kbd class="click">j</kbd>
+                <span class="name">snare</span>
+        </div>
+
+        <div data-key="75" class="key">
+            <kbd class="click">k</kbd>
+            <span class="name">toom</span>
+        </div>
+
+        <div data-key="76" class="key">
+            <kbd class="click">l</kbd>
+            <span class="name">tink</span>
+        </div>
+
+    </div>
+
+
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
+    
+<script>
+
+window.addEventListener('keydown', function(e){
+
+    const aud = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    if(!aud){return;}
+
+    aud.play();
+
+    key.classList.add('plying');
+
+});
+
+function renoveTransiton(e){
+
+    if(e.propertyName !== 'transform'){
+
+            return;
+
+    }
+
+    this.classList.remove('plying');
+
+    
+
+}
+
+const keys = document.querySelectorAll('.key');
+
+keys.forEach(key => key.addEventListener('transitionend', renoveTransiton));
+
+</script>
+</body>
+</html>
